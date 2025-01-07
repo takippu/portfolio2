@@ -34,28 +34,14 @@
       >
         <div>
           <div class="text-sm mb-2 text-emerald-700/60 dark:text-emerald-500/60">welcome</div>
-          <h1 class="text-2xl font-bold mb-3 text-emerald-900 dark:text-emerald-50">Hi, I'm {{ name }},</h1>
-          <p class="text-emerald-800/80 dark:text-emerald-100/80">
-            a software developer with strong focus on the user experience, animations and micro interactions.
-          </p>
+          <h1 class="text-2xl font-bold mb-3 text-emerald-900 dark:text-emerald-50">Hi, I'm {{ name }}, a Jr. Fullstack Developer</h1>
+            <p class="text-emerald-800/80 dark:text-emerald-100/80 text-justify">
+              I am a passionate Jr. Fullstack Developer with a strong proficiency in Laravel. My interests lie in exploring the latest advancements in AI and diving deep into various JavaScript frameworks. 
+              <br/> I enjoy building robust and scalable web applications, constantly seeking to improve my skills and stay updated with the latest industry trends. Whether it's backend development with Laravel or creating dynamic front-end experiences, I am always eager to take on new challenges and contribute to innovative projects.
+              <br/><br/> If you are interested to collaborate or something, hit me up (not literally).
+            </p>
         </div>
-        <div class="flex gap-3 mt-4">
-          <a 
-            v-for="social in socials" 
-            :key="social.name"
-            :href="social.url"
-            class="btn btn-ghost btn-sm text-emerald-500 hover:text-emerald-400 hover:bg-emerald-500/10"
-            target="_blank"
-          >
-            <component :is="social.icon" class="w-5 h-5" />
-          </a>
-          <a 
-            href="#contact" 
-            class="btn btn-sm bg-emerald-500/20 border-emerald-500/50 text-emerald-500 hover:bg-emerald-500/30 hover:border-emerald-500"
-          >
-            Book a call
-          </a>
-        </div>
+        
       </div>
 
       <!-- Avatar/About Card -->
@@ -68,8 +54,8 @@
           
           <!-- Introduction -->
           <div class="space-y-4 text-emerald-800/80 dark:text-emerald-100/80 text-sm">
-            <p class="font-medium text-base">
-              Hi, I'm Gianmarco, a front-end software developer from Italy.
+            <p class="font-medium text-base text-bold">
+              male, 25 years old, based in the Malaysia
             </p>
 
             <!-- Tools Section -->
@@ -86,17 +72,28 @@
                 </span>
               </div>
             </div>
+            <div>
+              <h3 class="font-medium mb-2">subtools or interests :</h3>
+              <div class="flex flex-wrap gap-2">
+                <!-- {/* Tool Tags */} -->
+                <span 
+                  v-for="subTool in subTools" 
+                  :key="subTool"
+                  class="px-2 py-1 rounded-full bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 text-xs"
+                >
+                  {{ subTool }}
+                </span>
+              </div>
+            </div>
 
             <!-- Passions & Hobbies -->
             <p>
-              Beyond coding, I'm passionate about design, illustration, animation and 3D modelling and traveling. 
-              An unusual hobby of mine is collecting vintage passports, they're interesting pieces of history to me.
+              Beyond coding, I'm an avid Hiker and long term Gamer. I also enjoy reading, writing, and exploring new technologies.
             </p>
 
             <!-- Philosophy -->
             <p>
-              While I have some preferred tools, I always choose the best one for the job, 
-              even if it's not on my usual list. My goal is to find the right solution for each project.
+              I am curious and always thirst for new knowledge.
             </p>
           </div>
         </div>
@@ -272,23 +269,23 @@
 
           <!-- Email -->
           <a 
-            href="mailto:your.email@example.com"
+            href="mailto:thaqifrosdi@gmail.com"
             class="flex items-center gap-3 text-emerald-300 hover:text-emerald-400 transition-colors"
           >
             <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
             </svg>
-            <span class="text-sm">your.email@example.com</span>
+            <span class="text-sm">thaqifrosdi@gmail.com</span>
           </a>
 
           <!-- Social Links -->
           <div class="flex flex-wrap gap-3">
             <a 
-              href="https://github.com/yourusername"
+              href="https://github.com/takippu"
               target="_blank"
               rel="noopener noreferrer"
               class="p-2 rounded-lg bg-emerald-500/10 text-emerald-400 hover:bg-emerald-500/20 hover:text-emerald-300 transition-all"
-              title="GitHub"
+              title="No don't look at my github, it's empty and a mess :'("
             >
               <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
@@ -296,7 +293,7 @@
             </a>
 
             <a 
-              href="https://linkedin.com/in/yourusername"
+              href="https://linkedin.com/in/thaqifrosdi"
               target="_blank"
               rel="noopener noreferrer"
               class="p-2 rounded-lg bg-emerald-500/10 text-emerald-400 hover:bg-emerald-500/20 hover:text-emerald-300 transition-all"
@@ -319,7 +316,7 @@
               </svg>
             </a>
 
-            <a 
+            <!-- <a 
               href="https://twitter.com/yourusername"
               target="_blank"
               rel="noopener noreferrer"
@@ -329,7 +326,7 @@
               <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
               </svg>
-            </a>
+            </a> -->
           </div>
 
           <!-- Call to action -->
@@ -446,7 +443,7 @@
 <script setup>
 import { ref, onMounted, watch, onUnmounted } from 'vue'
 
-const name = 'Your Name'
+const name = 'Thaqif Rosdi'
 const currentTime = ref('12:03 AM')
 const theme = ref(localStorage.getItem('theme') || 'dark')
 
@@ -501,12 +498,21 @@ const experience = [
 ]
 
 const tools = [
-  'JavaScript',
-  'React',
-  'Solidjs',
-  'Astro',
+  'Laravel',
+  'MobaXterm',
+  'Laragon',
+  'HeidiSQL',
   'Svelte',
   'Nodejs'
+]
+
+const subTools = [
+  'Gen AI',
+  'JS Frameworks',
+  'Python',
+  'Business',
+  'DevOps',
+  'SaaS'
 ]
 
 const currentIndex = ref(0)
