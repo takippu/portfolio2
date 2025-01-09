@@ -121,6 +121,7 @@
     class="opacity-0 rounded-2xl card-backdrop card-border card-hover relative group overflow-hidden transition-all duration-300 h-[400px] md:h-full"
     :class="isLoaded ? 'animate-card-4' : ''"
   >
+  
     <!-- Project Stack -->
     <div class="relative h-full">
       <TransitionGroup
@@ -128,22 +129,32 @@
         tag="div"
         class="h-full"
       >
+      <div class="text-sm ml-6 mt-1 mb-2 text-emerald-700/60 dark:text-emerald-500/60">
+        blog
+      </div>
         <div 
           v-for="(post, index) in posts"
           :key="post.id"
           v-show="currentBlog === index"
           class="absolute inset-0 p-4 sm:p-6"
         >
+
+        
           <!-- Project Content -->
           <div class="h-full flex flex-col">
             <!-- Read Now Button -->
             <a
               :href="`http://localhost:5173/blogs/${post.id}`"
-              class="absolute top-4 right-4 p-2 rounded-lg bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 hover:bg-emerald-500/20 transition-colors"
+              class="absolute top-4 right-4 p-0.8 text-sm rounded-lg bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 hover:bg-emerald-500/20 transition-colors"
             >
               Read Now
             </a>
-
+            <a
+              :href="`http://localhost:5173/blogs/`"
+              class="absolute top-4 right-24 p-0.8 text-sm rounded-lg bg-orange-500/10 text-white hover:bg-orange-500/20 transition-colors"
+            >
+              Visit blog
+            </a>
             <!-- Project Info -->
             <div class="flex-1">
               <h3 class="text-lg font-bold text-emerald-900 dark:text-emerald-50 mb-2">
