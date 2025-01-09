@@ -100,7 +100,7 @@
       </div>
 
       <!-- Theme Toggle Card -->
-      <div 
+      <!-- <div 
         class="opacity-0 p-4 sm:p-6 rounded-2xl card-backdrop card-border card-hover flex items-center justify-center group transition-all duration-300 h-[100px] md:h-auto"
         :class="isLoaded ? 'animate-card-3' : ''"
       >
@@ -115,8 +115,90 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
           </svg>
         </button>
-      </div>
+      </div> -->
+      <!-- BlogPost Card -->
+      <div 
+    class="opacity-0 rounded-2xl card-backdrop card-border card-hover relative group overflow-hidden transition-all duration-300 h-[400px] md:h-full"
+    :class="isLoaded ? 'animate-card-4' : ''"
+  >
+    <!-- Project Stack -->
+    <div class="relative h-full">
+      <TransitionGroup
+        name="stack"
+        tag="div"
+        class="h-full"
+      >
+        <div 
+          v-for="(post, index) in posts"
+          :key="post.id"
+          v-show="currentBlog === index"
+          class="absolute inset-0 p-4 sm:p-6"
+        >
+          <!-- Project Content -->
+          <div class="h-full flex flex-col">
+            <!-- Read Now Button -->
+            <a
+              :href="`http://localhost:5173/blogs/${post.id}`"
+              class="absolute top-4 right-4 p-2 rounded-lg bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 hover:bg-emerald-500/20 transition-colors"
+            >
+              Read Now
+            </a>
 
+            <!-- Project Info -->
+            <div class="flex-1">
+              <h3 class="text-lg font-bold text-emerald-900 dark:text-emerald-50 mb-2">
+                {{ post.title }}
+              </h3>
+              <p class="text-sm text-emerald-800/80 dark:text-emerald-100/80 mb-3 line-clamp-3">
+                {{ post.description }}
+              </p>
+              <div class="flex flex-wrap gap-2">
+                <span 
+                  v-for="tech in post.technologies" 
+                  :key="tech"
+                  class="px-2 py-1 rounded-full bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 text-xs"
+                >
+                  {{ tech }}
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </TransitionGroup>
+
+      <!-- Navigation -->
+      <div class="absolute inset-x-0 bottom-0 pb-3">
+        <div class="flex items-center justify-between px-4 pt-2 border-t border-emerald-500/10">
+          <button 
+            @click="prevBlog"
+            class="p-2 rounded-full bg-emerald-900/10 dark:bg-emerald-100/10 hover:bg-emerald-900/20 dark:hover:bg-emerald-100/20 transition-colors"
+          >
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+          <div class="flex gap-1.5">
+            <div 
+              v-for="(_, index) in posts" 
+              :key="index"
+              class="w-1.5 h-1.5 rounded-full transition-colors"
+              :class="currentBlog === index ? 
+                'bg-emerald-600 dark:bg-emerald-400' : 
+                'bg-emerald-300/30 dark:bg-emerald-700/30'"
+            />
+          </div>
+          <button 
+            @click="nextBlog"
+            class="p-2 rounded-full bg-emerald-900/10 dark:bg-emerald-100/10 hover:bg-emerald-900/20 dark:hover:bg-emerald-100/20 transition-colors"
+          >
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
       <!-- Time Card -->
       <div 
         class="opacity-0 p-4 sm:p-6 rounded-2xl card-backdrop card-border card-hover flex items-center justify-center group transition-all duration-300 h-[100px] md:h-auto"
@@ -256,6 +338,7 @@
         </div>
       </div>
 
+      
       <!-- Contact Card -->
       <div 
         class="opacity-0 col-span-2 md:col-span-1 p-4 sm:p-6 rounded-2xl card-backdrop card-border card-hover group transition-all duration-300 md:h-auto"
@@ -442,7 +525,39 @@
 
 <script setup>
 import { ref, onMounted, watch, onUnmounted } from 'vue'
+// Reactive variable to store posts
+const posts = ref([]);
 
+// Current index for navigation
+const currentBlog = ref(0);
+
+// Function to fetch posts
+const fetchPosts = async () => {
+  try {
+    const response = await fetch('/posts/blog-list.json');
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    const data = await response.json();
+    posts.value = data;
+  } catch (error) {
+    console.error('Error fetching posts:', error);
+  }
+};
+
+// Navigation functions
+const nextBlog = () => {
+  currentBlog.value = (currentBlog.value + 1) % posts.value.length;
+};
+
+const prevBlog = () => {
+  currentBlog.value = (currentBlog.value - 1 + posts.value.length) % posts.value.length;
+};
+
+// Fetch posts when the component is mounted
+onMounted(() => {
+  fetchPosts();
+});
 const name = 'Thaqif Rosdi'
 const currentTime = ref('12:03 AM')
 const theme = ref(localStorage.getItem('theme') || 'dark')
