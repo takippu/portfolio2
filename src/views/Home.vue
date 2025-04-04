@@ -162,14 +162,14 @@
           <!-- Blog Post Content (Positioned above background) -->
           <div class="relative z-10 flex-1 flex flex-col p-4 sm:p-6 text-white pb-20 md:pb-24"> <!-- Kept pb-20 for mobile, increased to md:pb-24 for desktop -->
             <!-- Post Info (Centered) -->
-            <div class="flex-1 flex flex-col justify-center items-center text-center mb-4">
+            <!-- <div class="flex-1 flex flex-col justify-center items-center text-center mb-4">
               <h3 class="text-base sm:text-lg font-bold mb-1 line-clamp-3">
                 {{ post.title }}
               </h3>
               <span v-if="post.published_at" class="text-xs text-neutral-300/80 block">
                 {{ formatDate(post.published_at) }}
               </span>
-            </div>
+            </div> -->
 
             <!-- Stats and Action (Bottom) -->
             <div class="flex justify-between items-center mt-auto flex-shrink-0">
