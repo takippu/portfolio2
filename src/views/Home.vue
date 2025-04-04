@@ -188,14 +188,14 @@
             </div>
 
             <!-- Post Info (Centered - Adjusted padding) -->
-            <div class="flex-1 flex flex-col justify-center items-center text-center pt-10 pb-20 md:pb-24"> <!-- Added top padding, kept bottom padding -->
+            <!-- <div class="flex-1 flex flex-col justify-center items-center text-center pt-10 pb-20 md:pb-24"> 
               <h3 class="text-base sm:text-lg font-bold mb-1 line-clamp-3">
                 {{ post.title }}
               </h3>
               <span v-if="post.published_at" class="text-xs text-neutral-300/80 block">
                 {{ formatDate(post.published_at) }}
               </span>
-            </div>
+            </div> -->
           </div>
         </div>
       </TransitionGroup>
