@@ -123,7 +123,7 @@
 
     <!-- Project Stack -->
     <div class="relative h-full">
-      <div class="text-sm px-4 pt-3 text-emerald-200 dark:text-emerald-200">
+      <div class="absolute top-3 left-3 z-10 px-2 py-1 rounded-lg bg-black/40 backdrop-blur-sm text-emerald-200 text-xs font-semibold">
         blog
       </div>
       <TransitionGroup
@@ -183,7 +183,7 @@
               rel="noopener noreferrer"
               class="px-2 py-1 text-xs rounded-lg bg-emerald-600 text-white hover:bg-emerald-700 transition-colors cursor-pointer backdrop-blur-sm"
             >
-              Visit
+              View Post
             </a>
           </div>
 
