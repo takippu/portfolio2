@@ -160,21 +160,11 @@
           </div>
 
           <!-- Blog Post Content (Positioned above background) -->
-          <div class="relative z-10 flex-1 flex flex-col p-4 sm:p-6 text-white pb-20 md:pb-24"> <!-- Kept pb-20 for mobile, increased to md:pb-24 for desktop -->
-            <!-- Post Info (Centered) -->
-            <!-- <div class="flex-1 flex flex-col justify-center items-center text-center mb-4">
-              <h3 class="text-base sm:text-lg font-bold mb-1 line-clamp-3">
-                {{ post.title }}
-              </h3>
-              <span v-if="post.published_at" class="text-xs text-neutral-300/80 block">
-                {{ formatDate(post.published_at) }}
-              </span>
-            </div> -->
-
-            <!-- Stats and Action (Bottom) -->
-            <div class="flex justify-between items-center mt-auto flex-shrink-0">
+          <div class="relative z-10 flex-1 flex flex-col p-4 sm:p-6 text-white"> <!-- Removed bottom padding -->
+            <!-- Stats and Action (Moved to Top Right) -->
+            <div class="absolute top-4 right-4 flex items-center gap-3 text-xs">
               <!-- Stats -->
-              <div class="flex gap-3 text-xs text-neutral-300/90">
+              <div class="hidden sm:flex gap-3 text-neutral-300/90"> <!-- Hide stats on small screens initially -->
                 <span class="flex items-center gap-1">
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 opacity-80" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a2 2 0 01-2-2V10a2 2 0 012-2h8z" />
@@ -193,14 +183,25 @@
                 :href="post.url"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="px-2 py-1 text-xs rounded-lg bg-white/10 text-white hover:bg-white/20 transition-colors"
+                class="px-2 py-1 text-xs rounded-lg bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 hover:bg-emerald-500/20 transition-colors cursor-pointer"
               >
                 Visit Now
               </a>
             </div>
+
+            <!-- Post Info (Centered - Adjusted padding) -->
+            <div class="flex-1 flex flex-col justify-center items-center text-center pt-10 pb-20 md:pb-24"> <!-- Added top padding, kept bottom padding -->
+              <h3 class="text-base sm:text-lg font-bold mb-1 line-clamp-3">
+                {{ post.title }}
+              </h3>
+              <span v-if="post.published_at" class="text-xs text-neutral-300/80 block">
+                {{ formatDate(post.published_at) }}
+              </span>
+            </div>
           </div>
         </div>
       </TransitionGroup>
+
 
       <!-- Navigation -->
       <div class="absolute inset-x-0 bottom-0 pb-2">
