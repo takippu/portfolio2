@@ -1,5 +1,5 @@
 <template>
-  <main class="h-screen md:h-screen md:overflow-hidden overflow-auto p-4 sm:p-6 relative">
+  <main class="min-h-screen md:h-screen md:overflow-hidden overflow-auto p-3 sm:p-6 relative">
     <!-- Animated Background -->
     <div class="fixed inset-0 -z-10">
       <div class="absolute inset-0 bg-gradient">
@@ -26,7 +26,7 @@
     </div>
 
     <!-- Content Grid -->
-    <div class="min-h-fit md:h-full grid gap-3 sm:gap-4 relative z-10 max-w-7xl mx-auto pb-20 md:pb-6">
+    <div class="min-h-fit md:h-full grid gap-3 sm:gap-4 relative z-10 max-w-7xl mx-auto pb-16 md:pb-6">
       <!-- Welcome Card -->
       <div 
         class="opacity-0 p-4 sm:p-6 rounded-2xl card-backdrop card-border card-hover md:col-span-2 md:row-span-2 flex flex-col justify-between group transition-all duration-300"
@@ -118,7 +118,7 @@
       </div> -->
       <!-- BlogPost Card -->
       <div 
-    class="opacity-0 rounded-2xl card-backdrop card-border card-hover relative group overflow-hidden transition-all duration-300 h-[400px] md:h-full"
+    class="opacity-0 rounded-2xl card-backdrop card-border card-hover relative group overflow-hidden transition-all duration-300 h-[300px] md:h-full"
     :class="isLoaded ? 'animate-card-4' : ''"
   >
   
@@ -265,7 +265,7 @@
       <!-- Design Works Card -->
       <!-- Projects Card -->
       <div 
-        class="opacity-0 rounded-2xl card-backdrop card-border card-hover relative group overflow-hidden transition-all duration-300 h-[400px] md:h-full"
+        class="opacity-0 rounded-2xl card-backdrop card-border card-hover relative group overflow-hidden transition-all duration-300 h-[350px] md:h-full"
         :class="isLoaded ? 'animate-card-4' : ''"
       >
         <!-- Project Stack -->
@@ -926,6 +926,8 @@ html, body {
 /* Ensure content doesn't overflow cards */
 .card-backdrop {
   @apply overflow-hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Adjust text sizes for better mobile readability */
@@ -938,6 +940,18 @@ html, body {
   }
   .text-base {
     font-size: 0.875rem;
+  }
+  .text-sm {
+    font-size: 0.8125rem;
+  }
+  
+  /* Improve spacing in cards */
+  .p-4 {
+    padding: 0.875rem;
+  }
+  
+  .card-backdrop {
+    height: 100%;
   }
 }
 
@@ -1126,7 +1140,8 @@ html, body {
 @media (max-width: 767px) {
   .grid {
     grid-template-columns: 1fr !important; /* Force single column */
-    gap: 1rem !important;
+    gap: 1.25rem !important;
+    padding-bottom: 2rem;
   }
 
   /* Make all cards take full width */
@@ -1134,25 +1149,35 @@ html, body {
     grid-column: 1 / -1 !important;
     height: auto !important;
     min-height: 100px;
+    max-height: none !important;
   }
 
   /* Adjust specific card heights */
   .grid > div:first-child {
-    min-height: 200px;
+    min-height: 220px;
   }
 
   .grid > div:nth-child(2) {
-    min-height: 400px;
+    min-height: 350px;
+    max-height: 450px !important;
+    overflow-y: auto;
+  }
+
+  /* Blog card height */
+  .grid > div:nth-child(3) {
+    min-height: 300px;
+    max-height: 350px !important;
   }
 
   /* Projects card height */
   .grid > div:nth-child(6) {
-    height: 450px !important;
+    min-height: 350px;
+    max-height: 400px !important;
   }
 
   /* Contact card */
   .grid > div:last-child {
-    min-height: 250px;
+    min-height: 200px;
   }
 }
 
@@ -1212,4 +1237,29 @@ html, body {
     overflow: hidden;
   }
 }
-</style> 
+
+/* Responsive bento box improvements */
+@media (max-width: 767px) {
+  /* Improve card spacing and layout */
+  .card-backdrop {
+    margin-bottom: 0;
+  }
+  
+  /* Better content distribution */
+  .flex-col {
+    justify-content: flex-start;
+  }
+  
+  /* Ensure images don't overflow */
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  /* Improve scrolling experience */
+  .overflow-auto {
+    -webkit-overflow-scrolling: touch;
+    scroll-padding: 1rem;
+  }
+}
+</style>
