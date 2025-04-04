@@ -320,7 +320,7 @@
 
                 <!-- Project Info -->
                 <div class="flex-1">
-                  <div class="flex items-center justify-between mb-2">
+                  <div class="flex items-center justify-between mb-8">
                     <h3 class="text-lg font-bold text-emerald-900 dark:text-emerald-50">
                       {{ project.title }}
                     </h3>
@@ -433,7 +433,7 @@
             </a>
 
             <a
-              href="https://instagram.com/yourusername"
+              href="https://instagram.com/thaqifrosdi.xyz"
               target="_blank"
               rel="noopener noreferrer"
               class="p-2 rounded-lg bg-emerald-500/10 text-emerald-400 hover:bg-emerald-500/20 hover:text-emerald-300 transition-all"
@@ -833,30 +833,39 @@ const selectedProject = ref(null)
 const projects = [
   {
     id: 1,
-    title: "Portfolio 2024",
-    description: "Personal portfolio website built with Vue 3 and Tailwind CSS. Features smooth animations and dark mode.",
-    image: "https://images.unsplash.com/photo-1487014679447-9f8336841d58?q=80&w=2940&auto=format&fit=crop",
-    technologies: ["Vue", "Tailwind", "Vite"],
-    liveUrl: "https://facebook.com", // Placeholder
-    repoUrl: "https://facebook.com"  // Placeholder
+    title: "ResitJer",
+    description: "AI-Powered Receipt Management System that helps you manage your receipts and track your spending.",
+    image: "https://media.licdn.com/dms/image/v2/D562DAQHETXndUeKQQA/profile-treasury-image-shrink_800_800/B56ZVuTgYlHoAc-/0/1741312363031?e=1744390800&v=beta&t=njGtD7hUPJXD7hWaKnER6tX13GKAlrM8i9U4jAqAORE",
+    technologies: ["Next.js", "TypeScript", "Shadcn UI", "Supabase", "Vercel", "Gemini AI"],
+    liveUrl: "https://resitjer.my", // Placeholder
+    repoUrl: "#"  // Placeholder
   },
   {
     id: 2,
-    title: "E-commerce Dashboard",
-    description: "Admin dashboard for managing products, orders, and customers. Includes real-time analytics.",
-    image: "https://images.unsplash.com/photo-1472851294608-062f824d29cc?q=80&w=2940&auto=format&fit=crop",
-    technologies: ["React", "TypeScript", "Redux"],
-    liveUrl: "#", // Placeholder
+    title: "KasiFesyen",
+    description: "AI-powered fashion assistant that helps you create stylish outfits based on your clothing items or descriptions.",
+    image: "https://media.licdn.com/dms/image/v2/D5622AQEF-zOJgenCJA/feedshare-shrink_1280/B56ZXnaWLUHoAo-/0/1743344199939?e=1746662400&v=beta&t=0CvmUgZgoyvfps1_UCZ8M4MukE_QfZCSN-3yo1EbRug",
+    technologies: ["Next.js", "TypeScript", "Shadcn UI", "Framer Motion", "Render", "Gemini AI"],
+    liveUrl: "https://kasifesyen.onrender.com/", // Placeholder
     repoUrl: "#"  // Placeholder
   },
   {
     id: 3,
-    title: "Weather App",
-    description: "Beautiful weather application with animated backgrounds and 7-day forecast.",
+    title: "Voices Of UMP (FYP)",
+    description: "A platform for University Malaysia of Pahang studedents to voice out their opinion and raise petitions.",
     image: "https://images.unsplash.com/photo-1592210454359-9043f067919b?q=80&w=2940&auto=format&fit=crop",
-    technologies: ["SolidJS", "TailwindCSS", "APIs"],
+    technologies: ["Laravel", "Vue.js", "PHP", "Blade"],
     liveUrl: "#", // Placeholder
-    repoUrl: "#"  // Placeholder
+    repoUrl: "https://github.com/takippu/voices-of-ump"  // Placeholder
+  },  
+  {
+    id: 4,
+    title: "Simple2Do",
+    description: "A simple to-do-list web app",
+    image: "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?q=80&w=1172&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    technologies: ["Laravel", "Vue.js", "PHP", "Blade"],
+    liveUrl: "#", // Placeholder
+    repoUrl: "https://github.com/takippu/simpletodo"  // Placeholder
   }
 ]
 
