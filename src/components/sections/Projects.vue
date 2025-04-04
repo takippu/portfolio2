@@ -44,7 +44,19 @@
               
               <!-- Content Overlay -->
               <div class="absolute inset-0 bg-black/50 p-4 sm:p-6 flex flex-col justify-end">
-                <h3 class="text-xl sm:text-2xl font-bold text-white mb-2">{{ project.title }}</h3>
+                <div class="flex items-center justify-between mb-2">
+                  <h3 class="text-xl sm:text-2xl font-bold text-white">{{ project.title }}</h3>
+                  <button 
+                    @click.stop="openModal(project)"
+                    class="p-2 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors absolute top-4 right-4"
+                    title="View details"
+                  >
+                    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                    </svg>
+                  </button>
+                </div>
                 <p class="text-white/80 text-sm sm:text-base mb-3 sm:mb-4 line-clamp-2 sm:line-clamp-3">
                   {{ project.description }}
                 </p>
@@ -117,11 +129,71 @@
         </button>
       </div>
     </div>
+
+    <!-- Project Modal -->
+    <Modal
+      :is-open="isModalOpen"
+      :title="selectedProject?.title || ''"
+      @close="closeModal"
+    >
+      <div v-if="selectedProject" class="space-y-6">
+        <!-- Project Image -->
+        <div class="relative h-48 sm:h-64 rounded-lg overflow-hidden">
+          <img 
+            :src="selectedProject.image" 
+            :alt="selectedProject.title"
+            class="w-full h-full object-cover"
+          />
+        </div>
+
+        <!-- Project Description -->
+        <div class="space-y-4">
+          <p class="text-emerald-800/80 dark:text-emerald-100/80">
+            {{ selectedProject.description }}
+          </p>
+
+          <!-- Technologies -->
+          <div>
+            <h4 class="text-sm font-semibold text-emerald-900 dark:text-emerald-50 mb-2">Technologies</h4>
+            <div class="flex flex-wrap gap-2">
+              <span 
+                v-for="tech in selectedProject.technologies" 
+                :key="tech"
+                class="px-2 py-1 rounded-full bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 text-xs"
+              >
+                {{ tech }}
+              </span>
+            </div>
+          </div>
+
+          <!-- Links -->
+          <div class="flex gap-3 pt-2">
+            <a 
+              v-if="selectedProject.demo" 
+              :href="selectedProject.demo" 
+              target="_blank"
+              class="px-4 py-2 rounded-lg bg-emerald-500 text-white hover:bg-emerald-600 transition-colors text-sm"
+            >
+              View Live Demo
+            </a>
+            <a 
+              v-if="selectedProject.github" 
+              :href="selectedProject.github" 
+              target="_blank"
+              class="px-4 py-2 rounded-lg border border-emerald-500/20 text-emerald-700 dark:text-emerald-300 hover:bg-emerald-500/10 transition-colors text-sm"
+            >
+              View on GitHub
+            </a>
+          </div>
+        </div>
+      </div>
+    </Modal>
   </section>
 </template>
 
 <script setup>
 import { ref, computed } from 'vue'
+import Modal from '../ui/Modal.vue'
 
 const projects = [
   {
@@ -164,11 +236,25 @@ const projects = [
 
 const currentIndex = ref(0)
 const VISIBLE_CARDS = 4
-let touchStartY = 0
+const touchStartY = ref(null)
+const touchEndY = ref(null)
+const isModalOpen = ref(false)
+const selectedProject = ref(null)
+
+// Modal functions
+const openModal = (project) => {
+  selectedProject.value = project
+  isModalOpen.value = true
+}
+
+const closeModal = () => {
+  isModalOpen.value = false
+  selectedProject.value = null
+}
 
 // Touch handling for mobile swipe
 const handleTouchStart = (e) => {
-  touchStartY = e.touches[0].clientY
+  touchStartY.value = e.touches[0].clientY
 }
 
 const handleTouchMove = (e) => {
@@ -219,4 +305,4 @@ const prevProject = () => {
     touch-action: none;
   }
 }
-</style> 
+</style>

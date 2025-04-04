@@ -298,9 +298,17 @@
 
                 <!-- Project Info -->
                 <div class="flex-1">
-                  <h3 class="text-lg font-bold text-emerald-900 dark:text-emerald-50 mb-2">
-                    {{ project.title }}
-                  </h3>
+                  <div class="flex items-center justify-between mb-2">
+                    <h3 class="text-lg font-bold text-emerald-900 dark:text-emerald-50">
+                      {{ project.title }}
+                    </h3>
+                    <span 
+                      @click="openProjectModal(project)"
+                      class="px-2 py-1 text-xs rounded-lg bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 hover:bg-emerald-500/20 transition-colors cursor-pointer"
+                    >
+                      View Now
+                    </span>
+                  </div>
                   <p class="text-sm text-emerald-800/80 dark:text-emerald-100/80 mb-3 line-clamp-2">
                     {{ project.description }}
                   </p>
@@ -447,14 +455,17 @@
     >
       <div 
         v-if="showExperience" 
-        class="fixed inset-0 z-50 flex flex-col md:items-center justify-center overflow-y-auto md:overflow-y-hidden"
+        class="fixed inset-0 z-50 flex items-center justify-center p-4 overflow-hidden"
       >
+        <!-- Modal Backdrop -->
+        <div class="absolute inset-0 bg-black/30 backdrop-blur-sm" @click="showExperience = false"></div>
+        
         <!-- Modal Content -->
         <div 
-          class="relative w-full min-h-screen md:min-h-0 md:h-auto md:max-h-[80vh] md:max-w-3xl bg-white dark:bg-neutral-900 md:rounded-2xl shadow-xl overflow-hidden flex flex-col"
+          class="relative w-full max-h-[90vh] max-w-3xl bg-white dark:bg-neutral-900 rounded-lg shadow-xl overflow-hidden flex flex-col"
         >
           <!-- Sticky Header -->
-          <div class="sticky top-0 z-20 bg-white/80 dark:bg-neutral-900/80 backdrop-blur-md border-b border-neutral-200 dark:border-neutral-800">
+          <div class="sticky top-0 z-10 bg-white dark:bg-neutral-900 border-b border-neutral-200 dark:border-neutral-800 flex-shrink-0">
             <div class="px-4 py-4 sm:px-6 flex justify-between items-center">
               <h2 class="text-xl font-bold text-emerald-900 dark:text-emerald-50">
                 Experience Timeline
@@ -471,7 +482,7 @@
           </div>
 
           <!-- Scrollable Content -->
-          <div class="flex-1 md:overflow-y-auto md:overscroll-contain">
+          <div class="flex-1 overflow-y-auto overscroll-contain modal-scroll-content">
             <div class="px-4 py-6 sm:px-6">
               <!-- Timeline Content -->
               <div class="relative">
@@ -534,11 +545,81 @@
         </div>
       </div>
     </Transition>
+
+    <!-- Add the Project Modal -->
+    <Transition
+      enter-active-class="transition duration-300 ease-out"
+      enter-from-class="opacity-0 scale-95 rotate-3"
+      enter-to-class="opacity-100 scale-100 rotate-0"
+      leave-active-class="transition duration-200 ease-in"
+      leave-from-class="opacity-100 scale-100 rotate-0"
+      leave-to-class="opacity-0 scale-95 -rotate-3"
+    >
+      <div 
+        v-if="showProjectModal && selectedProject" 
+        class="fixed inset-0 z-50 flex items-center justify-center p-4 overflow-hidden"
+      >
+        <!-- Modal Backdrop -->
+        <div class="absolute inset-0 bg-black/30 backdrop-blur-sm" @click="showProjectModal = false"></div>
+
+        <!-- Modal Content -->
+        <div 
+          class="relative w-full max-h-[90vh] max-w-3xl bg-white dark:bg-neutral-900 rounded-lg shadow-xl overflow-hidden flex flex-col"
+        >
+          <!-- Sticky Header -->
+          <div class="sticky top-0 z-10 bg-white dark:bg-neutral-900 border-b border-neutral-200 dark:border-neutral-800 flex-shrink-0">
+            <div class="px-4 py-4 sm:px-6 flex justify-between items-center">
+              <h2 class="text-xl font-bold text-emerald-900 dark:text-emerald-50">
+                {{ selectedProject.title }}
+              </h2>
+              <button 
+                @click="showProjectModal = false"
+                class="p-2 text-emerald-800 dark:text-emerald-200 hover:text-emerald-600 dark:hover:text-emerald-400"
+              >
+                <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Scrollable Content -->
+          <div class="flex-1 overflow-y-auto overscroll-contain modal-scroll-content"> <!-- Added common class -->
+            <div class="px-4 py-6 sm:px-6 pb-[env(safe-area-inset-bottom,1.5rem)]"> <!-- Added safe area padding -->
+              <!-- Project Image -->
+              <div class="relative h-48 sm:h-60 mb-4 rounded-lg overflow-hidden"> <!-- Adjusted mobile image height -->
+                <img 
+                  :src="selectedProject.image" 
+                  :alt="selectedProject.title"
+                  class="w-full h-full object-cover"
+                />
+              </div>
+              
+              <!-- Project Description -->
+              <p class="text-sm sm:text-base text-emerald-800/80 dark:text-emerald-100/80 mb-4">
+                {{ selectedProject.description }}
+              </p>
+              
+              <!-- Technologies -->
+              <div class="flex flex-wrap gap-2">
+                <span 
+                  v-for="tech in selectedProject.technologies" 
+                  :key="tech"
+                  class="px-2 py-1 rounded-full bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 text-xs"
+                >
+                  {{ tech }}
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Transition>
   </main>
 </template>
 
 <script setup>
-import { ref, onMounted, watch, onUnmounted } from 'vue'
+import { ref, onMounted, watch, onUnmounted, computed } from 'vue'
 // Reactive variable to store posts
 const posts = ref([]);
 
@@ -645,6 +726,8 @@ const subTools = [
 ]
 
 const currentIndex = ref(0)
+const showProjectModal = ref(false)
+const selectedProject = ref(null)
 const projects = [
   {
     id: 1,
@@ -679,14 +762,22 @@ const prevProject = () => {
     : currentIndex.value - 1
 }
 
-// Handle body scroll lock
-watch(showExperience, (newValue) => {
+const openProjectModal = (project) => {
+  selectedProject.value = project
+  showProjectModal.value = true
+}
+
+// Computed property to check if any modal is open
+const isModalOpen = computed(() => showExperience.value || showProjectModal.value)
+
+// Watch the computed property to manage body class and reset scroll
+watch(isModalOpen, (newValue) => {
   if (newValue) {
     document.body.classList.add('modal-open')
-    // Reset scroll position when opening modal
+    // Reset scroll position when opening modal - target BOTH potential modals
     setTimeout(() => {
-      const modalContent = document.querySelector('.overflow-y-auto')
-      if (modalContent) modalContent.scrollTop = 0
+      const modalContents = document.querySelectorAll('.modal-scroll-content') // Add a common class to scrollable areas
+      modalContents.forEach(el => { if (el) el.scrollTop = 0 })
     }, 0)
   } else {
     document.body.classList.remove('modal-open')
@@ -697,6 +788,7 @@ watch(showExperience, (newValue) => {
 onUnmounted(() => {
   document.body.classList.remove('modal-open')
 })
+
 
 onMounted(() => {
   // Initialize theme
@@ -1184,41 +1276,6 @@ html, body {
   }
 }
 
-/* Modal mobile improvements */
-@media (max-width: 767px) {
-  /* Full screen modal on mobile */
-  .fixed.inset-0.z-50 {
-    padding: 0;
-  }
-
-  /* Modal content improvements */
-  .modal-content {
-    height: 100vh;
-    height: -webkit-fill-available;
-    border-radius: 0;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  /* Better touch targets */
-  .modal-content button {
-    min-height: 44px;
-    min-width: 44px;
-    padding: 12px;
-  }
-
-  /* Improve modal header */
-  .sticky.top-0 {
-    padding: 1rem;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(8px);
-  }
-
-  /* Add safe area padding */
-  .modal-content {
-    padding-bottom: env(safe-area-inset-bottom, 20px);
-  }
-}
 
 /* Maintain desktop layout */
 @media (min-width: 768px) {
