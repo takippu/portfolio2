@@ -26,6 +26,28 @@
         <!-- Body -->
         <div class="p-4 sm:p-6 overflow-y-auto max-h-[calc(90vh-8rem)]">
           <slot></slot>
+
+          <!-- Action Buttons -->
+          <div v-if="liveUrl || githubUrl" class="mt-6 pt-4 border-t border-emerald-500/10 flex justify-end space-x-3">
+            <a 
+              v-if="liveUrl" 
+              :href="liveUrl" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              class="px-4 py-2 bg-emerald-600 text-white rounded-md hover:bg-emerald-700 transition-colors text-sm font-medium"
+            >
+              View Live
+            </a>
+            <a 
+              v-if="githubUrl" 
+              :href="githubUrl" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              class="px-4 py-2 bg-gray-700 text-white rounded-md hover:bg-gray-800 transition-colors text-sm font-medium"
+            >
+              View Code
+            </a>
+          </div>
         </div>
       </div>
     </div>
@@ -41,6 +63,14 @@ defineProps({
   title: {
     type: String,
     required: true
+  },
+  liveUrl: {
+    type: String,
+    default: ''
+  },
+  githubUrl: {
+    type: String,
+    default: ''
   }
 });
 
