@@ -123,10 +123,7 @@
 
     <!-- Project Stack -->
     <div class="relative h-full">
-      <!-- Blog Title Header -->
-      <div class="text-sm px-4 pt-3 bg-emerald-500/10 text-emerald-700 dark:text-emerald-500/60">
-        blog
-      </div>
+      <!-- Removed Blog Title Header -->
 
       <TransitionGroup
         name="stack"
@@ -144,65 +141,54 @@
           v-for="(post, index) in posts"
           :key="post.id"
           v-show="currentBlog === index"
-          class="absolute inset-0 flex flex-col p-4 sm:p-6"
+          class="absolute inset-0"
         >
-          <!-- Image Container -->
-          <div v-if="post.social_image" class="relative h-40 mb-4 rounded-lg overflow-hidden">
+          <!-- Image Fills Card -->
+          <div v-if="post.social_image" class="absolute inset-0 overflow-hidden">
             <img
               :src="post.social_image"
-              :alt="post.title"
+              :alt="post.title || 'Blog post image'"
               class="w-full h-full object-cover"
             />
+            <!-- Subtle overlay for text -->
+             <div class="absolute inset-0 bg-gradient-to-t from-black/30 via-black/10 to-transparent"></div>
           </div>
           <!-- Fallback if no image -->
-          <div v-else class="relative h-40 mb-4 rounded-lg bg-neutral-200 dark:bg-neutral-800 flex items-center justify-center text-neutral-500">
-            No Image
+          <div v-else class="absolute inset-0 bg-neutral-200 dark:bg-neutral-800 flex items-center justify-center text-neutral-500">
+            No Image Available
           </div>
 
-          <!-- Blog Post Content -->
-          <div class="flex-1 flex flex-col">
-            <!-- Stats and Action (Moved to Top Right relative to content area) -->
-            <div class="flex justify-end items-center gap-3 text-xs mb-2">
-              <!-- Stats -->
-              <div class="hidden sm:flex items-center gap-3 px-2 py-1 rounded-lg bg-emerald-500/10 text-emerald-700 dark:text-emerald-300">
-                <span class="flex items-center gap-1 text-emerald-700 dark:text-emerald-300">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a2 2 0 01-2-2V10a2 2 0 012-2h8z" />
-                  </svg>
-                  {{ post.comments_count }}
-                </span>
-                <span class="flex items-center gap-1 text-emerald-700 dark:text-emerald-300">
-                   <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                  </svg>
-                  {{ post.public_reactions_count }}
-                </span>
-              </div>
-              <!-- Visit Button -->
-              <a
-                :href="post.url"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="px-2 py-1 text-xs rounded-lg bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 hover:bg-emerald-500/20 transition-colors cursor-pointer"
-              >
-                Visit Now
-              </a>
-            </div>
-
-            <!-- Post Info -->
-            <div class="flex-1">
-              <h3 class="text-base sm:text-lg font-bold mb-1 line-clamp-2 text-emerald-900 dark:text-emerald-50">
-                {{ post.title }}
-              </h3>
-              <span v-if="post.published_at" class="text-xs text-emerald-700/80 dark:text-emerald-300/80 block mb-2">
-                {{ formatDate(post.published_at) }}
+          <!-- Stats and Action (Absolute Top Right) -->
+          <div class="absolute top-3 right-3 z-10 flex items-center gap-2">
+            <!-- Stats -->
+            <div class="hidden sm:flex items-center gap-2 px-2 py-1 rounded-lg bg-black/40 backdrop-blur-sm text-white text-xs">
+              <span class="flex items-center gap-1">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a2 2 0 01-2-2V10a2 2 0 012-2h8z" />
+                </svg>
+                {{ post.comments_count }}
               </span>
-              <!-- Add a short description or excerpt if available in 'post' object -->
-              <!-- <p class="text-xs text-emerald-800/80 dark:text-emerald-100/80 line-clamp-2">
-                {{ post.description || 'No description available.' }}
-              </p> -->
+              <span class="flex items-center gap-1">
+                 <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                </svg>
+                {{ post.public_reactions_count }}
+              </span>
             </div>
+            <!-- Visit Button -->
+            <a
+              :href="post.url"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="px-2 py-1 text-xs rounded-lg bg-emerald-600 text-white hover:bg-emerald-700 transition-colors cursor-pointer backdrop-blur-sm"
+            >
+              Visit
+            </a>
           </div>
+
+          <!-- Removed Title and Date -->
+          <!-- Content area is now empty, image and stats/button overlay it -->
+
         </div>
       </TransitionGroup>
 
