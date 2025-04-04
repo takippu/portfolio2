@@ -181,7 +181,7 @@
                 :href="post.url"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="px-2 py-1 text-xs rounded-lg bg-emerald-600 text-white hover:bg-emerald-700 transition-colors cursor-pointer" <!-- Solid background for button -->
+                class="px-2 py-1 text-xs rounded-lg bg-emerald-600 text-white hover:bg-emerald-700 transition-colors cursor-pointer" 
               >
                 Visit Now
               </a>
