@@ -118,45 +118,48 @@
       </div> -->
       <!-- BlogPost Card -->
       <div 
-    class="opacity-0 rounded-2xl card-backdrop card-border card-hover relative group overflow-hidden transition-all duration-300 h-[300px] md:h-full"
+    class="opacity-0 rounded-2xl card-backdrop card-border card-hover relative group overflow-hidden transition-all duration-300 h-[350px] md:h-full"
     :class="isLoaded ? 'animate-card-4' : ''"
   >
   
     <!-- Project Stack -->
     <div class="relative h-full">
+      <!-- Blog Title Header -->
+      <div class="text-sm px-4 pt-3 text-emerald-700/60 dark:text-emerald-500/60">
+        blog
+      </div>
+      
       <TransitionGroup
         name="stack"
         tag="div"
-        class="h-full"
+        class="h-full pt-2"
       >
-      <div class="text-sm ml-6 mt-1 mb-2 text-emerald-700/60 dark:text-emerald-500/60">
-        blog
-      </div>
         <div 
           v-for="(post, index) in posts"
           :key="post.id"
           v-show="currentBlog === index"
-          class="absolute inset-0 p-4 sm:p-6"
+          class="absolute inset-0 pt-8 px-4 sm:p-6"
         >
-
-        
           <!-- Project Content -->
           <div class="h-full flex flex-col">
-            <!-- Read Now Button -->
-            <a
-              :href="`http://localhost:5173/blogs/${post.id}`"
-              class="absolute top-4 right-4 p-0.8 text-sm rounded-lg bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 hover:bg-emerald-500/20 transition-colors"
-            >
-              Read Now
-            </a>
-            <a
-              :href="`http://localhost:5173/blogs/`"
-              class="absolute top-4 right-24 p-0.8 text-sm rounded-lg bg-orange-500/10 text-white hover:bg-orange-500/20 transition-colors"
-            >
-              Visit blog
-            </a>
+            <!-- Action Buttons -->
+            <div class="flex justify-end gap-2 mb-4">
+              <a
+                :href="`http://localhost:5173/blogs/`"
+                class="px-2 py-1 text-xs rounded-lg bg-orange-500/10 text-white hover:bg-orange-500/20 transition-colors"
+              >
+                Visit blog
+              </a>
+              <a
+                :href="`http://localhost:5173/blogs/${post.id}`"
+                class="px-2 py-1 text-xs rounded-lg bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 hover:bg-emerald-500/20 transition-colors"
+              >
+                Read Now
+              </a>
+            </div>
+            
             <!-- Project Info -->
-            <div class="flex-1">
+            <div class="flex-1 overflow-y-auto pb-12">
               <h3 class="text-lg font-bold text-emerald-900 dark:text-emerald-50 mb-2">
                 {{ post.title }}
               </h3>
@@ -178,8 +181,8 @@
       </TransitionGroup>
 
       <!-- Navigation -->
-      <div class="absolute inset-x-0 bottom-0 pb-3">
-        <div class="flex items-center justify-between px-4 pt-2 border-t border-emerald-500/10">
+      <div class="absolute inset-x-0 bottom-0 pb-2">
+        <div class="flex items-center justify-between px-4 pt-2 border-t border-emerald-500/10 bg-gradient-to-t from-black/5 dark:from-black/20 to-transparent">
           <button 
             @click="prevBlog"
             class="p-2 rounded-full bg-emerald-900/10 dark:bg-emerald-100/10 hover:bg-emerald-900/20 dark:hover:bg-emerald-100/20 transition-colors"
