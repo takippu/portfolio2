@@ -199,7 +199,7 @@
         <div class="flex items-center justify-between px-4 pt-2 border-t border-emerald-500/10">
           <button
             @click="prevBlog"
-            class="p-2 rounded-full bg-emerald-900/10 dark:bg-emerald-100/10 hover:bg-emerald-900/20 dark:hover:bg-emerald-100/20 transition-colors"
+            class="p-2 rounded-full bg-emerald-900 dark:bg-emerald-900 hover:bg-emerald-900/20 dark:hover:bg-emerald-200/90  transition-colors"
           >
             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
@@ -217,7 +217,7 @@
           </div>
           <button
             @click="nextBlog"
-            class="p-2 rounded-full bg-emerald-900/10 dark:bg-emerald-100/10 hover:bg-emerald-900/20 dark:hover:bg-emerald-100/20 transition-colors"
+            class="p-2 rounded-full bg-emerald-900 dark:bg-emerald-900 hover:bg-emerald-200 dark:hover:bg-emerald-200/90 transition-colors"
           >
             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
