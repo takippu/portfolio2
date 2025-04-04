@@ -123,8 +123,9 @@
 
     <!-- Project Stack -->
     <div class="relative h-full">
-      <!-- Removed Blog Title Header -->
-
+      <div class="text-sm px-4 pt-3 text-emerald-200 dark:text-emerald-200">
+        blog
+      </div>
       <TransitionGroup
         name="stack"
         tag="div"
