@@ -162,17 +162,17 @@
           <!-- Blog Post Content (Positioned above background) -->
           <div class="relative z-10 flex-1 flex flex-col p-4 sm:p-6 text-white"> <!-- Removed bottom padding -->
             <!-- Stats and Action (Moved to Top Right) -->
-            <div class="absolute top-4 right-4 flex items-center gap-3 text-xs">
+            <div class="absolute top-4 right-4 flex items-center gap-3 text-xs z-20"> <!-- Added z-20 -->
               <!-- Stats -->
-              <div class="hidden sm:flex gap-3 text-neutral-300/90"> <!-- Hide stats on small screens initially -->
+              <div class="hidden sm:flex gap-3 text-neutral-100"> <!-- Changed text color -->
                 <span class="flex items-center gap-1">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 opacity-80" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 opacity-90" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"> <!-- Increased opacity -->
                     <path stroke-linecap="round" stroke-linejoin="round" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a2 2 0 01-2-2V10a2 2 0 012-2h8z" />
                   </svg>
                   {{ post.comments_count }}
                 </span>
                 <span class="flex items-center gap-1">
-                   <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 opacity-80" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                   <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 opacity-90" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"> <!-- Increased opacity -->
                     <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                   </svg>
                   {{ post.public_reactions_count }}
@@ -546,7 +546,11 @@
                       <div class="text-sm sm:text-base text-emerald-800 dark:text-emerald-200 font-medium mb-2">
                         {{ job.company }}
                       </div>
-                      <p class="text-xs sm:text-sm text-emerald-800/80 dark:text-emerald-100/80">
+                      <!-- Description: Render as list if array, paragraph otherwise -->
+                      <ul v-if="Array.isArray(job.description)" class="list-disc pl-5 space-y-1 text-xs sm:text-sm text-emerald-800/80 dark:text-emerald-100/80">
+                        <li v-for="(item, i) in job.description" :key="i">{{ item }}</li>
+                      </ul>
+                      <p v-else class="text-xs sm:text-sm text-emerald-800/80 dark:text-emerald-100/80">
                         {{ job.description }}
                       </p>
 
@@ -782,25 +786,46 @@ const currentCompany = 'ALPHV Technologies Sdn. Bhd.'
 
 const experience = [
   {
-    period: '2023 - Present',
-    role: 'Senior Frontend Developer',
-    company: 'Current Company Name',
-    description: 'Leading the frontend development team, implementing new features, and improving application performance.',
-    technologies: ['Vue.js', 'TypeScript', 'Tailwind CSS', 'GraphQL']
+    period: 'April 2024 - Present',
+    role: 'Jr. Full Stack Developer, Fulltime',
+    company: 'ALPHV Technologies Sdn. Bhd.',
+    description: [
+      'Led end-to-end development of a legacy Pawn System application, managing challenging handovers with minimal documentation and leveraging GitLab for planning and issue tracking.',
+      'Established a GitLab CI/CD pipeline for a B2B money lending platform, enhancing deployment efficiency and reliability.',
+      'Developed computer vision solutions for retail analytics using FastAPI and Laravel to integrate YOLOv8 AI models with Roboflow for data labeling and training.',
+      'Created a real-time vehicle traffic analysis dashboard with WebSocket integration using Vue.js and shadcn UI components.',
+      'Contributed to technical strategy for a law firm management system, focusing on architecture and technology selection.',
+      'Planned resource allocation for a Muslim-focused mobile application featuring prayer instructions and Quran recitation.',
+      'Executed a white labeling process to transform an existing application into a new branded product.'
+    ],
+    technologies: ['Vue.js', 'TypeScript', 'Tailwind CSS', 'GitLab CI/CD', 'FastAPI', 'Laravel', 'YOLOv8', 'Roboflow', 'WebSocket', 'shadcn UI', 'Python']
   },
   {
-    period: '2021 - 2023',
-    role: 'Frontend Developer',
-    company: 'Previous Company Name',
-    description: 'Developed and maintained multiple web applications, focusing on user experience and responsive design.',
-    technologies: ['React', 'Next.js', 'SCSS', 'REST API']
+    period: 'September 2023 – April 2024',
+    role: 'Software Developer, Fulltime',
+    company: 'Two Q Alliance Sdn. Bhd.',
+    description: [
+      'Developed functionalities for reporting and statistics, integrating third-party packages (Maatwebsite/Excel) into a Laravel project.',
+      'Assumed responsibility for critical modules, demonstrating adaptability and quick learning in a fast-paced environment.',
+      'Created comprehensive Excel macros using VBA to enable efficient batch data uploads.',
+      'Contributed to mobile application development using Flutter for cross-platform solutions.',
+      'Implemented backend CRUD functionalities using Livewire in a Laravel project.',
+      'Assisted in demo sessions with end-users by providing on-the-spot troubleshooting and clear explanations.'
+    ],
+    technologies: ['JavaScript', 'PHP', 'MySQL', 'Bootstrap', 'Laravel', 'jQuery', 'MobaXterm', 'Flutter', 'VBA', 'Livewire', 'Excel']
   },
-  {
-    period: '2019 - 2021',
-    role: 'Web Developer',
-    company: 'Another Company',
-    description: 'Built responsive websites and implemented various interactive features using modern web technologies.',
-    technologies: ['JavaScript', 'PHP', 'MySQL', 'Bootstrap']
+    {
+    period: 'March - August 2023',
+    role: 'Software Developer, Intern',
+    company: 'Two Q Alliance Sdn. Bhd.',
+    description: [
+      'Developed user interfaces for 12 sub-modules using Bootstrap and jQuery within 2 months.',
+      'Collaborated with project managers and system analysts to integrate interfaces seamlessly with overall system architecture.',
+      'Implemented the Laravel framework to create robust backend functionalities, enhancing system performance and scalability.',
+      'Crafted responsive and intuitive interfaces, leading to increased user satisfaction and positive stakeholder feedback.',
+      'Conducted successful demo sessions with end-users, offering real-time troubleshooting and guidance.'
+    ],
+    technologies: ['JavaScript', 'PHP', 'MySQL', 'Bootstrap', 'Laravel', 'jQuery', 'MobaXterm']
   },
   // Add more experiences...
 ]

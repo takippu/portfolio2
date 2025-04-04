@@ -11,9 +11,19 @@
       <div class="navbar h-16">
         <!-- Logo/Brand -->
         <div class="navbar-start">
-          <a href="#" class="text-xl sm:text-2xl font-bold text-primary">
-            Portfolio
-          </a>
+          <div class="flex items-center">
+            <a href="#" class="text-xl sm:text-2xl font-bold text-primary mr-2">
+              Portfolio
+            </a>
+            <!-- Add the GIFs here -->
+            <div class="inline-block ml-2">
+              <img src="https://media.tenor.com/sbfBfp3FeY8AAAAj/oia-uia.gif" alt="oia uia gif" class="inline-block h-8 w-auto" />
+              <img src="https://media.tenor.com/sbfBfp3FeY8AAAAj/oia-uia.gif" alt="oia uia gif" class="inline-block h-8 w-auto" />
+              <img src="https://media.tenor.com/sbfBfp3FeY8AAAAj/oia-uia.gif" alt="oia uia gif" class="inline-block h-8 w-auto" />
+              <img src="https://media.tenor.com/sbfBfp3FeY8AAAAj/oia-uia.gif" alt="oia uia gif" class="inline-block h-8 w-auto" />
+              <img src="https://media.tenor.com/sbfBfp3FeY8AAAAj/oia-uia.gif" alt="oia uia gif" class="inline-block h-8 w-auto" />
+            </div>
+          </div>
         </div>
 
         <!-- Desktop Navigation -->
@@ -190,4 +200,4 @@ onUnmounted(() => {
     padding-top: env(safe-area-inset-top);
   }
 }
-</style> 
+</style>
